@@ -31,3 +31,16 @@ a { color: var(--accent); }
 .doc strong { color: var(--text); }
 .doc ul { padding-left: 1.4rem; margin: 0.5rem 0; }
 footer { border-top: 1px solid var(--line); padding: 1rem; text-align: center; font-size: 0.9rem; color: var(--muted); }
+.support { display: grid; gap: 0.4rem; margin: 1.5rem 0; }
+.support label { font-weight: 600; margin-top: 0.6rem; }
+.support input, .support textarea {
+  font: inherit; color: var(--text); background: transparent;
+  border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 0.75rem; width: 100%;
+}
+.support input:focus, .support textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.support button {
+  justify-self: start; margin-top: 0.8rem; font: inherit; font-weight: 600; color: var(--bg);
+  background: var(--accent); border: 0; border-radius: 8px; padding: 0.6rem 1.4rem; cursor: pointer;
+}
+.support button:disabled { opacity: 0.6; cursor: default; }
+.support .status { margin: 0.25rem 0 0; min-height: 1.55em; }

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — Aviation Weather</title>
+  <meta name="description" content="Aviation Weather support: report a problem, ask a question or suggest a feature.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./">Aviation Weather</a>
+  </header>
+  <main class="doc">
+    <h1>Support</h1>
+    <p>Found a wrong number, a crash or a missing airport? Have an idea? Write to us, we answer by email.</p>
+    <p>Helpful in a report: the airport or route, the time in UTC, and what you expected to see.</p>
+
+    <form id="support" class="support" action="https://docs.google.com/forms/d/e/1FAIpQLScLfc3cZP5eZRVU_LPAMlmvsT1zhoIoe4dFjX9SR0f6-P50Kg/formResponse" method="post">
+      <label for="email">Your email</label>
+      <input id="email" name="entry.360672566" type="email" autocomplete="email" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="entry.1040609232" rows="7" required></textarea>
+      <button type="submit">Send</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+  <footer>
+    <p><a href="./">Aviation Weather</a> · <a href="terms.html">Terms of Use</a> · <a href="privacy.html">Privacy Policy</a> · © 2026</p>
+  </footer>
+  <script>
+    // Google Forms answers without CORS headers, so the response is opaque: a resolved fetch means the request left.
+    const form = document.getElementById("support");
+    const status = form.querySelector(".status");
+    const button = form.querySelector("button");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      status.textContent = "Sending…";
+      try {
+        await fetch(form.action, { method: "POST", mode: "no-cors", body: new URLSearchParams(new FormData(form)) });
+        form.reset();
+        status.textContent = "Thank you. We got your message and will answer by email.";
+      } catch {
+        status.textContent = "Could not send. Check the connection and try again, or email hello@builtfor.app.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
